@@ -6,17 +6,37 @@ Every week something new!
 
 Run the program with something like `isbn-catcher 9781590173138` and a file (or more) with the html/json code containing information about this book appears in the folder.
 
+## Day 03
+- display the content of the answer of the `urllib` call
+- write it to a file `api-isbn-date.json`
+
 ## Day 02
 - add a gitignore file, which ignores the venv specific files and folders.
 - make a call to google books api and display the content of the json.
 - should `pyvenv.cfg` be in gitignore?
 
+### Achieved
+#### Virtual Envs and .gitignore
+- it seems, that `pyvenv.cfg` should be in gitignore file. At least github does this too. This is no good reason, but I think it is an indication for this.
+- add all pyvenv related stuff to gitignore
+
+#### Make a http call
+This seems to be the simplest thing to do with python.
+
+``` python
+import urllib.request
+contents = urllib.request.urlopen(f'https://www.googleapis.com/books/v1/volumes?q=isbn{isbn}')
+print(contents)
+``` 
+> https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python
 
 ## Day 01
 - Create new a python project. (with a virtual environment manager) (How does this work again?) 
 - have a program, that reads an input and displays it.
 
 ### Achieved
+
+#### Virtual Env
 - create a virtual environment, change into the folder and activate it
   ``` python
     python3 -m venv 01-isbn-catcher
@@ -28,6 +48,8 @@ Run the program with something like `isbn-catcher 9781590173138` and a file (or 
   deactivate
   ```
   > https://stackoverflow.com/questions/990754/how-to-leave-exit-deactivate-a-python-virtualenv
+
+#### Read input from command line
 - read an input using the `sys` module
   ``` python
   import sys
