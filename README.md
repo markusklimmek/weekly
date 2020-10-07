@@ -10,6 +10,20 @@ Run the program with something like `isbn-catcher 9781590173138` and a file (or 
 - where does this method `get_content_charset` come from? The response seems to be of type `http.client.HTTPResponse`. But where is that defined?
 - write it to a file `api-isbn-date.json`
 
+### Achieved
+#### print file
+``` python
+with open('file.name', 'w') as f:
+    f.write(contents.read().decode('utf-8'))
+```
+this is an interesting construct.
+A problem is now, like with all streams, I cannot use him two times. When he was read, he was read.
+So at the moment, I can read the stream and print it, or I can write it to a file.
+
+If I want to write the file into a directory, I must 
+1. create the directory
+2. and then use this crazy `with open() as f:` syntax. Where does it come from?
+
 ## Day 03
 - display the content of the answer of the `urllib` call &#10004;
 
@@ -29,7 +43,8 @@ Run the program with something like `isbn-catcher 9781590173138` and a file (or 
   This will display the whole json, as it should be displayed.
   > https://stackoverflow.com/questions/14592762/a-good-way-to-get-the-charset-encoding-of-an-http-response-in-python
 #### Questions
-  But where does this method `get_content_charset` come from? Not really form `email.message.py`???
+  But where does this method `get_content_charset` come from? Not really form `email.message.py`??? It seems, that it comes directly from there... I cannot explain how or why...
+
 
 
 ## Day 02
