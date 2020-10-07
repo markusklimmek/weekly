@@ -12,5 +12,4 @@ print(f'The isbn is: { isbn }')
 
 contents = urllib.request.urlopen(f'https://www.googleapis.com/books/v1/volumes?q=isbn:{ isbn }')
 
-# TODO: prints only the adress of the object. I need a python thing.
-print(contents)
+print(contents.read().decode(contents.headers.get_content_charset()))

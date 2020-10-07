@@ -6,14 +6,36 @@ Every week something new!
 
 Run the program with something like `isbn-catcher 9781590173138` and a file (or more) with the html/json code containing information about this book appears in the folder.
 
-## Day 03
-- display the content of the answer of the `urllib` call
+## Day 04
+- where does this method `get_content_charset` come from? The response seems to be of type `http.client.HTTPResponse`. But where is that defined?
 - write it to a file `api-isbn-date.json`
 
+## Day 03
+- display the content of the answer of the `urllib` call &#10004;
+
+### Achieved
+#### print bufferedReader
+1. debug output and see what type the answer is. In this case it was a `BufferedReader`, a byte stream. So we just needed to read the stream:
+   ``` python
+   contents = urllib.request.urlopen(url)
+   stream = contents.read()
+   ```
+  > https://docs.python.org/3/library/io.html#io.BufferedReader
+2. This caused the display of `\n` in the output. And this is a problem of the used charset. When this is not defined, the `\n` is not seen as line break, but as two distinct signs.
+  ``` python
+  encoding = contents.headers.get_content_charset()
+  stream.decode(encoding)
+  ```
+  This will display the whole json, as it should be displayed.
+  > https://stackoverflow.com/questions/14592762/a-good-way-to-get-the-charset-encoding-of-an-http-response-in-python
+#### Questions
+  But where does this method `get_content_charset` come from? Not really form `email.message.py`???
+
+
 ## Day 02
-- add a gitignore file, which ignores the venv specific files and folders.
-- make a call to google books api and display the content of the json.
-- should `pyvenv.cfg` be in gitignore?
+- add a gitignore file, which ignores the venv specific files and folders. &#10004;
+- make a call to google books api and display the content of the json. &#10004;
+- should `pyvenv.cfg` be in gitignore? &#10004;
 
 ### Achieved
 #### Virtual Envs and .gitignore
@@ -31,7 +53,7 @@ print(contents)
 > https://stackoverflow.com/questions/645312/what-is-the-quickest-way-to-http-get-in-python
 
 ## Day 01
-- Create new a python project. (with a virtual environment manager) (How does this work again?) 
+- Create new a python project. (with a virtual environment manager) (How does this work again?)  &#10004;
 - have a program, that reads an input and displays it.
 
 ### Achieved
